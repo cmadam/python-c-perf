@@ -1,5 +1,5 @@
 # python-c-perf
-Demo of python invoking C code
+Demo of python invoking C code.  Runs on Linux ubuntu.
 
 ### Install cJSON Package
 
@@ -29,3 +29,13 @@ The C code uses the cJSON package (https://github.com/DaveGamble/cJSON) to trans
 
 ### Python Code
 The Python code uses the `ctypes` package to invoke the C function that transforms the JSON string and retrieves the result of that function.
+
+### To Run
+1. Build the C library from the C code using the `build_lib.sh` script:
+   ```
+   ./build_lib.sh qradar_kestrel.c
+   ```
+2. Run the python code:
+   ```
+   python3 qradar_kestrel.py
+   ```
