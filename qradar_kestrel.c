@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "qradar_kestrel.h"
 
 char *transform_json(char *py_json) {
@@ -9,10 +10,12 @@ char *transform_json(char *py_json) {
 	cJSON *name = cJSON_GetObjectItemCaseSensitive(input_event, "name");
 	cJSON *greeting = cJSON_GetObjectItemCaseSensitive(input_event,
 							   "greeting");
-	char text_str[128];
-	sprintf(text_str, "%s %s!", name->valuestring, greeting->valuestring);
+	char* text_str;
+	asprintf(&text_str, "%s %s!", name->valuestring, greeting->valuestring);
 	cJSON_AddStringToObject(new_event, "text", text_str);
 	cJSON_AddItemToArray(output_json, new_event);
+	free(text_str);
+	text_str = NULL;
     }
     json_result = cJSON_Print(output_json);
  end:
